@@ -778,7 +778,7 @@ Commons
 |Level|1|2|3|4|5|6|7|8|9|10|
 |-----|-|-|-|-|-|-|-|-|-|-|
 |Health|3|-|4|-|-|-|-|5|-|5|
-|Attack|1|-|-|-|-|-|2|-|-|-|
+|Attack|1|-|-|-|-|-|2|-|-|2|
 |Movement|3|-|-|-|-|-|-|-|4|4|
 |Special|0|-|-|-|-|-|-|-|-|0|
 |Reaction|0|-|-|-|-|-|-|-|-|0|
@@ -879,16 +879,16 @@ Attunement:
 |Health|+1|+1|-|+1|+1|-|+1|+1|-|	
 |Armor|-|-|+1|-|-|+1|-|-|+1|
 
-- 1| Quake: Target a unit within 1 Range. Move the unit in a straight line away from your Elite 2+X spaces, where X is Attunement. Special
-- 2| Internal Lattice: Your units are immune to blocked movement damage. [Blocked Movement damage](#Damage from Blocked Movement) is not halved in interactions with your units. Your units may choose to ignore forced Movement. Passive
+- 1| Kinetic Impulse: Target a unit within 1 Range. Move the unit in a straight line away from your Elite 1+X spaces, where X is Attunement. If your Commons encounter an enemy unit that can move through occupied spaces, this ability counts as a ranged attack using your Elite's Hit modifier. Special
+- 2| Stonewrought: Your units are immune to blocked movement damage. [Blocked Movement damage](#Damage from Blocked Movement) is not halved in interactions with your units. Your units may choose to ignore forced Movement. Passive
 - 3| Tremor: Enemy units within X spaces of your Commons may choose to take X Wounding Damage or move X spaces away from the closest Common as determined by the opposing player. Special. Cooldown
-- 4| Tectonics: Pick X spaces within cast range to have this active ability, where X is Attunement. Max 5 active spaces. At the end of each player's turn, move any unit on that space 5+X spaces in their space 1 direction, where X is attunement. This ability lasts until the beginning of your next turn. Special. Cooldown
-- 5| Gleization: Increase your units' Armor by their missing Health. Passive.
-- 6| Fissure: Create temporary obstacles for each space your Commons move through using Movement points. Obstacles are removed at the beginning of your next turn. Passive
-- 7| Demolish: Apply blocked movement damage to Obstacles. Passive
+- 4| Tectonics: Pick X spaces within cast range to have this active ability, where X is Attunement. Max X=5 active spaces. At the end of each player's turn, move any unit on that space 5+X spaces in their space 1 direction, where X is Attunement. This ability lasts until the beginning of your next turn. Special. Cooldown
+- 5| Gleization: Increase your units' Armor by their missing Health until the beginning of your next turn. Special.
+- 6| Fissure: Create temporary obstacles for each space your Commons move through using Movement points. These temporary Obstacles are removed at the beginning of your next turn. Passive
+- 7| Demolish: Apply blocked movement damage to non-permanent Obstacles. Passive
 - 8| Terraform: Create an Obstacle or move an existing Obstacle up to X spaces, where X is Attunement. You may also cast Quake on Obstacles. Special
 - 9| Shockwave: Choose a space as the center of the ability. At the end of the the next 3 turns, move units at T range X spaces away, where T is the number of turns since the ability was used, and X is Attunement. Direction is chosen by owner of moved unit. Special
-- 10| Stonewrought: If your Common causes blocked movement damage to another unit, increase the damage by your Common's Armor. Passive
+- 10| Gigalith: Your Commons take up 2x2 spaces instead of 1 space. If your Commons cause blocked movement damage to another unit, increase the damage by your Common's Armor. When combined with Fissure, choose only one space per Movement to add a temporary Obstacle. Passive
 
 - [Elements](#Elements)
 
