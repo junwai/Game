@@ -104,7 +104,7 @@ Analog Tactics is a game where each player controls a group of units. By securin
 - When health reaches 0 the affected unit is removed from play and 'eliminated'
 - If a unit is eliminated, remove it from the board
 - Health does not refresh across rounds unless stated otherwise
-- Leveling up affects the maximum health of a unit, but does not immediately affect a unit’s current health, i.e. if a unit currently has 5 HP and levels up, any increases to maximum health do not raise the unit’s HP from 5 to 6 at the beginning of the next round
+- Leveling up affects the maximum health of a unit automatically
 
 ## Attack
 - All initiated attacks are Range 1 unless otherwise stated
@@ -132,8 +132,10 @@ Unit U starts at position U with 2 movement points. U moves to U’ and spends 1
 ## Reaction
 - Expend a Reaction point to use a Reaction
 - Reactions may be used whenever the conditions described by the reaction ability are met
+- If no specific conditions are described in the ability, you can use that Reaction any time
 - In general, Reactions can be used after (or sometimes before) a 'step' in the game has occurred. A 'step' includes taking any action by using a point, evaluating the effect of using of a point, taking damage, losing health, etc. 
 - Reaction points refresh after each round
+- Reactions cannot be taken when your unit is eliminated
 
 ## Damage
 - Damage is the value associated with an initiated base attack
@@ -141,6 +143,10 @@ Unit U starts at position U with 2 movement points. U moves to U’ and spends 1
 - Certain abilities use a predetermined damage amount instead of your damage attribute
 - 'Losing Heath' is different than 'Taking Damage', as incoming damage is considered the precursor to losing health (after Armor/Reaction effects are considered).
 - Dealing damage is not synonymous with a successful attack
+
+### Targeted Damage
+- Damage that targets a unit is considered Targeted Damage
+- Damage that selects spaces is not considered Targeted Damage
 
 ## Armor
 - If a unit is damaged during an attack, take the incoming damage of the attacking unit and subtract the targeted unit's Armor value. This value is subtracted from the targeted unit’s Health.
@@ -166,13 +172,16 @@ Unit U starts at position U with 2 movement points. U moves to U’ and spends 1
 - After reaching level 10, any XP is converted to VP at a 1:1 ratio
 
 ### Automatic Leveling
-- At the end of the round, if you did not gain any XP and are below level 5, you automatically gain 1 level
+- At the end of the round, if you are below level 5 after applying all earned XP, gain 1 XP.
 
 ## Gaining Victory Points
-- Obtain 30VP to win the game
 - Gain 1VP per objective you control at the end of your turn
 - Gain 1VP by eliminating an enemy elite
 - Gain VP by gaining additional XP past the requirements to level up twice during a single turn at a 1:1 ratio (1XP:1VP)
+
+## Winning the Game
+- Obtain 30VP to end the game
+- If a player reaches 30VP, finish out the round. The player who has the most VP over 30 wins.
 
 ## Gaining Experience Points
 - Gain 1XP to level up your units by 1
@@ -266,11 +275,10 @@ Unit A is facing northeast and wishes to attack unit B. Unit A has 2 attack poin
 - By default Obstacles have 2 Armor and 1 Health
 - Obstacles are immune to [Piercing](#Piercing)
 - Permanent Obstacles cannot be eliminated
-- Permanent Obstacles cannot be placed 1 space from Objectives or Respawn points
+- Obstacles cannot be placed 1 space from Objectives or Respawn points
 
 ## Wounding
 - This keyword denotes damage dealt automatically with no Hit or Evasion roll
-- Wounding Damage cannot be directly reduced with reactions (some reactions may override the Wounding keyword or not reduce damage)
 - Armor is still applied when calculating reduction of health
 
 ## Piercing
@@ -282,7 +290,7 @@ Unit A is facing northeast and wishes to attack unit B. Unit A has 2 attack poin
 - This applies only to Reactions that would avoid or reduce incoming damage
 
 ## Area of Effect (AOE)
-- Abilities denoted with AOE deal damage to all surrounding spaces (1-6) from the target space
+- Abilities denoted with AOE deal Wounding damage to all surrounding spaces (1-6) from the target space
 - By default AOE damage can affect friendly units, although abilities may not affect friendly units if specified
 
 ## Forced Movement
@@ -311,7 +319,7 @@ All units have these abilities:
 - Reorient: Change the orientation of your unit. Reaction
 - Avoid: Increase Evasion roll by 1. Reaction
 - Purposeful Dodge: Your unit may move 1 space if it evades an Attack by 3 or more. Resolve before any Reactions. Passive
-- Reposition: After losing Health, a unit may use X Reaction points to use X remaining Movement points to use a standard Movement action. You may not use abilities to enhance this movement. X Reaction + X Movement
+- Reposition: A unit may use X Reaction points to use X remaining Movement points to use a standard Movement action. You may not use abilities to enhance this movement. X Reaction + X Movement
 - Redirected Strike: If this unit misses a Range 1 attack initiated by using an Attack point, deal X Wounding Damage to the target, where X is the number of Reaction points used. The target must still be within Range 1. Maximum of X is equal to this unit's Damage attribute. X Reaction.
 
 [Back to Top](#Table-of-Contents)
@@ -395,7 +403,7 @@ Common
 #### Warhammer: Weapon 
 - Warhammer Form 1: After resolving attack, Push. Attack
 - Warhammer Form 2: If there is an occupied space behind the targeted unit, this attack becomes Wounding. Attack
-- Warhammer Form 3: Face the target unit. Attack. On successful attack, Push units in spaces 1,2,6. Sequence. Attack
+- Warhammer Form 3: On successful attack, Push units in spaces 1,2,6. Attack
 - Warhammer Form 4: Piercing. Add target's Armor to your Damage. Attack
 ----
 - Warhammer+1:	Block. Reaction
@@ -469,7 +477,7 @@ Common
 + Warhammer + Spear: 
     * Distension: Push space 1, Face space 4, Attack space 1 with Sweeping. Move 1 space. Sequence. Attack
 + Warhammer + Rapier: 
-    * Clearing a Path: Attack space 1, Push space 1, Move into space 1, Attack space 1, Push space 1. Sequence. Attack
+    * Clearing a Path: Attack space 1, Push space 1, Move 2 spaces into space 1, Attack space 1, Push space 1. Sequence. Attack
 + Warhammer + Katana: 
     * Contusion: If there is an occupied space behind the target. take 1 Movement point from the target on successful attack. Passive
 + Warhammer + Axe: 
@@ -482,32 +490,32 @@ Common
     * Blade Dance: After moving, add Swift to this unit's next attack. Passive
 + Spear + Katana: 
     * Pruning Branches: Range 1 attack, Move 1 space, Range 2 attack to a different unit within Line of Sight. Sequence. Attack.
-+ Spear + Axe: 
++ Spear + Axe:
     * Incision: If your Hit roll exceeds the target unit's Evasion roll by 3 or more, add 2 damage to this attack. Passive
-+ Spear + Greatsword: 
++ Spear + Greatsword:
     * Harvest: Attack AOE range 1. Attack AOE 2 spaces away (not including Range 1). Sequence. Attack
-+ Spear + Bow: 
++ Spear + Bow:
     * Tranquility: If there are no adjacent units next to this unit, gain +1 Damage and +3 Hit. Passive
-+ Rapier + Katana: 
++ Rapier + Katana:
     * Rebuke: After a successful evasion within Range 1 and Line of Sight, Counter, then Move 1 Space. Passive
-+ Rapier + Axe: 
++ Rapier + Axe:
     * Barter: Instead of resolving Hit and Evasion from a Range 1 attack, take Wounding Damage then Attack the initiating unit a number of times equal to health lost. Reaction
-+ Rapier + Greatsword: 
++ Rapier + Greatsword:
     * Describing an Arc: Move 1 space, Attack 3 times at -2 Damage. Attack with Sweeping. Sequence. Attack
-+ Rapier + Bow: 
-    * Brushstrokes: Do 3 of the following in any combination (repeats allowed): Move, Attack, add 1 Damage to your next Attack, add 1 Hit to your next Attack. Attack
-+ Katana + Axe: 
++ Rapier + Bow:
+    * Brushstrokes: Do 3 of the following in any combination (repeats allowed): Move, Attack Range 3 at -1 Damage, add 1 Damage to your next Attack, add 1 Hit to your next Attack. Attack
++ Katana + Axe:
     * Collateral: Attack space 1 with Cleave. Move into space 2. Attack space 6 with Sweeping. Sequence. Attack
-+ Katana + Greatsword: 
++ Katana + Greatsword:
     * Gardener: Add Sweeping to Form 1 or Form 2. Special
-+ Katana + Bow: 
++ Katana + Bow:
     * Fleur de Lis: Attack with Sweeping, Face space 4, Attack up to 3 times within Range 3. Each target must be different. Sequence. Attack.
-+ Axe + Greatsword: 
++ Axe + Greatsword:
     * Sunder: You may use X additional Attack points to an Attack to multiply your Damage by X+1. Passive
-+ Axe + Bow: 
++ Axe + Bow:
     * Scattershot: Ranged attacks become Sweeping. Treat the target unit as space 1; space 2 and 6 are oriented toward the initiating unit. Passive
-+ Greatsword + Bow: 
-    * Aegis: Immune to damage from spaces 1,2 and 6. Passive
++ Greatsword + Bow:
+    * Aegis: Immune to damage from spaces 1, 2, and 6. All incoming damage is Swift. Passive
 ------
 - [Warrior](#Warrior)
 - [Assassin](#Assassin)
@@ -519,18 +527,21 @@ Common
 ## Assassin
 -----------
 
-- If a Common successfully uses an Attack point to hit an enemy with an Attack (even with zero damage), increase the Elite damage bonus by 1. Must be out of Line of Sight of any units on the targeted unit's team. Max Damage bonus is 15.
+- If a Common successfully damages an enemy from an Attack or Redirected Strike, increase the Elite damage bonus by 1. Must be out of Line of Sight of any units on the targeted unit's team. Max Damage bonus is 15.
 - If you eliminate an enemy Elite, reset Elite Damage bonus.
 - If you eliminate an enemy Common or decapture an Objective, lose damage bonus by half rounded up.
 
 - The Assassin can obtain upgrades through each of the [Houses](#Houses)
 - Whenever you eliminate an Elite, you increase the rank within one House of your choice. With increased rank, your Elite and Commons gain corresponding abilities corresponding to their rank in the House. 
 - You may also increase a House rank if you decapture an objective.
+- Your Elite and Commons have the abilities defined by the House upgrades
+- House upgrades immediately go into effect, as opposed to the end of the round
 
 - Capturing Objectives: Spend an attack point to capture an adjacent neutral [Objective](#Objectives) or respawn point
 
 - Assassin Ranks: Novice; Resident; Seneschal; Vizier; Grand Master
 - Novice ranked Commons do not apply any changes associated with a House.
+- Any Alternative Recruits give 1XP when eliminated
 
 Elite
 
@@ -555,135 +566,147 @@ Common
 |Movement|3|-|-|4|-|-|-|-|-|4|
 |Special|1|-|-|-|-|-|-|-|-|1|
 |Reaction|2|-|-|3|-|-|-|4|-|4|
-|Damage|1|-|-|-|-|2|-|-|-|2|
-|Evasion|2|-|-|-|-|-|-|-|-|3|
+|Damage|1|-|-|2|-|-|3|-|-|3|
+|Evasion|0|-|2|-|-|-|-|-|-|3|
 |Hit|1|-|2|-|-|-|-|-|3|3|
 |Armor|0|-|-|-|-|1|-|-|-|1|								
 
 ### Abilities
 
 ### Level 1: Tier 0
-- Recruit: Gain an upgraded or standard Common from your pool of eliminated Commons. An upgraded Common comes from the corresponding House from an objective you have captured. Place the Common next to the Objective corresponding to the House you are recruiting from. If you have no Objectives, gain a standard Common. You may recruit a standard Common even if upgraded Commons are available. You may upgrade an existing Common if it is next to the Obstacle corresponding to that House. Special
-- Efficiency: All Common attacks using an Attack point have Piercing. Passive
+- Efficiency: All damage dealt by your Commons have Piercing. Passive
 - Notoriety: Your units get a Hit modifier that is equal to the number of levels you are behind the highest level player. It is 0 if you are the highest level or tied for highest. Passive
+- Fighting Instinct: Your units win ties in combat rolls. Passive
 
 ### Level 2+: Tier 1
-- Fighting Instinct: Your units win ties in combat rolls. Passive
-- Quickstep: Before rolling Evasion, +1 Evasion, then move 1 space. Reaction
-- Kidney Shot: Attacking from spaces 3 or 5 deals +1 damage. Passive
-- Backstab: +1 Hit when attacking from space 4. Passive
+- Quickstep: Before rolling Evasion, +1 Evasion, then move 1 space after resolving the Attack. Reaction
+- Kidney Shot: Attacking from spaces 3 or 5 deals +1 Damage. Passive
+- Backstab: +2 Hit when attacking from space 4. Passive
 - Shift: You may immediately gain and use one Movement point each time you evade an attack. Passive
-- Rope: Move a unit one space at a distance of 3 or less. Movement is toward the unit using this ability. Special
-- Sabotage: Deal 3 damage to an Obstacle or Objective. Attack
+- Rope: Move a unit one space at a distance of 3 or less. Movement is toward the unit using this ability. Special, Reaction
+- Sabotage: Commons deal 3 damage to Obstacles and 4 damage to Objectives. Attack
+- Heightened senses: +2 Evasion. Evade Wounding damage as 8 Hit attack. Reaction
+- Interrogate: Every time your Elite damages an enemy, increase your Elite's damage bonus by 1. Passive
 
 ### Level 5+: Tier 2
 - Counter: Deal an attack at +3 Hit when successfully evading a Range 1 attack. Resulting damage does not affect Elite damage. Reaction
-- Interrogate: Every time your Elite damages an enemy, increase your elite's damage bonus by 1. Passive
-- Blur: Double evasion modifier when attacked from spaces 1, 2, or 6. Elite Only. Reaction
-- Familiar Territory: +2 Hit & +1 Damage to enemies positioned within 1 space of an objective. Passive
-- Heightened senses: This unit does not suffer evasion penalties when attacked. Reaction
+- Blur: When targeted by Enemy attacks, the enemy unit does not add their Hit modifier. Reaction
+- Familiar Territory: +3 Hit and +2 Damage to enemies positioned within 1 space of an Objective. Passive
 - Critical Strike: A successful Attack deals +Evasion modifier to damage if you roll a 5 or 6 during your Hit roll. Passive
-- Cripple: On successful Attack, reduce targeted unit’s Movement by 2 this round. Special
-- Trespass: Once per turn, you may use any Respawn points as if you owned them. Elite only. Passive
+- Cripple: For your next attack, target does not add their Evasion modifier. Special
+- Surprise Attack: Increase Elite damage bonus by 2 on a successful Common Attack. Reaction
+- Body Double: Switch your Elite with a Common. Attacks are resolved before using this ability. Special, Reaction
 
 ### Level 9+: Tier 3
-- Killshot: If the Damage of your Elite at least doubles the remaining health of your target, gain +3 Hit. Passive
-- Reaper: Add Swift to an attack. Special
-- Aversion: Your units may roll against X Hit instead of taking Wounding damage. X is 4 + half your level rounded up. Reaction
-- Body Double: Once per round, you may switch your Elite with a Common. Special, Reaction
+- Killshot: If the Damage of your Elite at least doubles the remaining health of your target, your Attack is Wounding. Passive
+- Aversion: Halve incoming Wounding Damage (rounding down). Reaction
+- Vendetta: When your Elite falls below half Health, gain 1 Attack point on your next turn. Reaction
+- Reaper: Your Elite may move freely between all Respawns and Objectives. Passive
 
 ## Houses
 #### House Conium
 
 Resident(1): +1 Common Special
 + Elite: 
-    * Susception: Units lose 2 Health if they target your Elite from within 1 space and roll a 1 or 2 for Hit. Passive
+    * Virulency: Units lose 2 Health if they target your Elite from within 1 space and roll a 1 or 2 for Hit. Passive
 + Common: 
-    * Infect: On successful attack, the targeted unit takes 3 Wounding damage at the end of the round if not within a friendly respawn area. Special
+    * Infect: On successful attack, the targeted unit takes 3 Wounding damage at the end of their turn if not within a friendly respawn area. Special
 
 Seneschal(2): +1 Common Special + Elite Special
 + Elite: 
     * Poisoned Dagger: If a target unit evades, deal half damage as Wounding damage. Special
 + Common: 
-    * Lethargy: On successful attack, target unit cannot inflict Wounding damage this round. Instead, resolve damage as a normal attack interaction. Passive 
+    * Lethargy: On successful attack, target unit cannot inflict Wounding damage this round. Instead, resolve damage as a normal combat interaction. Passive 
 
 Vizier(3): +1 Elite Special
-+ Elite: 
++ Elite:
     * Metastasis: Target within Range 1 loses 3 Health. Useable once per turn. Special
-+ Common: 
++ Common:
     * Biohazard: 2 damage AOE attack for all spaces within 2 Range. Piercing. Special
 
 Grand Master(4):
-+ Elite: 
-    * Plaguelord: All adjacent enemy units lose health equal to your Elite's damage bonus. Reset Elite damage. Special 
-+ Common: 
++ Elite:
+    * Plaguelord: All adjacent enemy units lose health equal to your Elite's damage bonus. Reset Elite damage bonus. Special
++ Common:
     * Dyskinesia: Adjacent enemy units have disadvantage on all dice rolls. Passive
 
-#### House Nal
+#### House Naal
 
-Resident(1): 
-+ Elite: 
-    * Ranger: -2 Damage for Range 1 attacks. -1 Special. Range +2. Evasion -1. Passive
-+ Common: 
-    * Tag: Target unit has -2 Evasion when targeted by Attacks during this round. Special
+Resident(1):
++ Elite:
+    * Ranger: -1 Special. Range +2. Passive
++ Common:
+    * Mark: Enemy units adjacent to your Commons have -2 Evasion when targeted by your Elite. Passive 
 
 Seneschal(2): 
-+ Elite: 
-    * Sniper: -3 Hit for Range 1 attacks. Hit +3. Evasion -1. Do not suffer penalties from [Partial Line of Sight](#Partial-Line-of-Sight). Passive
-+ Common: 
++ Elite:
+    * Sniper: +3 Hit for Range 2+ attacks. Do not suffer penalties from [Partial Line of Sight](#Partial-Line-of-Sight). Passive
++ Common:
     * Effective Cover: Cannot be targeted from more than 2 spaces away. Passive
 
 Vizier(3): 
-+ Elite: 
-    * Camouflage: +4 evasion if you have not used an attack point this round. +1 Range, -1 Movement, -1 Special. Passive
-+ Common: 
-    * Communications: Increase Elite damage by 2 instead of 1 on every successful attack. Passive
++ Elite:
+    * Camouflage: Do not lose your damage bonus when eliminating Commons. +1 Range, -1 Movement, -1 Special. Passive
++ Common:
+    * Communications: Double added bonus (i.e. 2 instead of 1) to Elite damage bonus when dealing damage from an Attack or Redirected Strike. Passive
 
-Grand Master(4): Elite: +1 Range, -1 Movement, -2 Hit for range 1 attacks
-+ Elite: 
+Grand Master(4): Elite: +1 Range, -1 Movement
++ Elite:
     * Volley: +2 Attack points this round. -3 Hit this round. Special
-+ Common: 
-    * Mark: Enemy units adjacent to your commons have -3 evasion if the common hasn't used an attack point this round. Passive 
++ Alternative Recruit: You may recruit a Spotter on your turn. Max 1. Special   
+    * Ability: Apply to all enemy units within Line of Sight: All damage to those units are Wounding. Gain advantage on all Evasion rolls initiated by those enemy units on any of your units
+
+|Spotter||
+|------------||
+|Attack|1|
+|Damage|1|
+|Health|5|
+|Armor|2|
+|Evasion|3|
+|Movement|7|
+|Special|0|
+|Reaction|0|
+|Range|1|
 
 #### House Caecus
 
 Resident(1):
 + Elite: 
-    * Shadowstrike: Your Elite's attacks are Swift. Passive
+    * Shadowstrike: Your Elite's Attacks are Swift. Passive
 + Common: 
-    * Meld: +4 Hit if 3+ adjacent spaces are occupied. Passive
+    * Meld: +4 Hit and +4 Evasion if 3+ adjacent spaces are occupied. Passive
 
 Seneschal(2): +1 Common Special
 + Elite: 
-    * Infiltrate: Your Elite may Move 3 spaces at the beginning of the round for free. Passive
+    * Infiltrate: Your Elite may Move 4 spaces at the beginning of the round for free. Passive
 + Common: 
-    * Smokescreen: Choose a space within 3 spaces. Units within this space and adjacent spaces have +2 Evasion modifier. Enemy units do not have line of sight into and through these spaces and can therefore not be targeted by ranged attacks. Wounding damage resolves as a normal attack to units within the affected spaces. Special
+    * Smokescreen: Choose a space within 3 spaces. Units within this space and adjacent spaces have +2 Evasion modifier. Enemy units do not have Line of Sight into and through these spaces and can therefore not be targeted by ranged attacks. Wounding damage resolves as a normal attack to units within the affected spaces. Lasts until the beginning of your next turn. Max 2 active at any one time. Special
 
 Vizier(3): +1 Elite Evasion, +1 Common Evasion
 + Elite: 
-    * Stalk: Moving into spaces adjacent to enemy units do not require a movement point. Max 5 spaces. Passive
+    * Stalk: Moving into spaces adjacent to enemy units do not require Movement points. Passive
 + Common: 
-    * Sneak: Moving into spaces that are not in enemy line of sight do not require movement points. Max 5 spaces. Passive
+    * Sneak: Moving into spaces that are not in enemy Line of Sight do not require Movement points. Passive
 
 Grand Master(4): +1 Elite Evasion, +1 Common Evasion
 + Elite: 
-    * Eviscerate: On successful attack, add Evasion modifier to damage. Special
+    * Eviscerate: On successful attack, add the difference between your Hit roll and the enemy's Evasion roll to damage. Minimum 0. Passive
 + Common: 
-    * Anonymity: Increase Evasion modifier by the number of adjacent enemies. Passive
+    * Anonymity: Increase this unit's Evasion modifier modifier by the number of adjacent enemies. Passive
 
 #### House Esper
 
 Resident(1):
 + Elite: 
-    * Levitation: Through the end of this round, you gain +2 Evasion and may move through occupied spaces. Special
+    * Levitation: Through the end of this round, you gain +2 Evasion, +2 Movement, and may move through occupied spaces. Special
 + Common: 
     * Time Dilation: +4 Movement this round. Special
 
 Seneschal(2): +1 Common Special, +1 Elite Special
 + Elite: 
-    * Psychokinesis: Move any unit 2 spaces. Special
+    * Portent: Disregard Hit and Evasion modifiers for this combat interaction. Reaction
 + Common: 
-    * Minor Psychokinesis: Move any unit 1 space. Special
+    * Psychic Scream: Your next attack is AOE. Special
 
 Vizier(3):
 + Elite: 
@@ -693,8 +716,8 @@ Vizier(3):
 
 Grand Master(4): +1 Common Special, +1 Elite Special
 + Elite: 
-    * Crumple: Gain +3 Range and Piercing for your next Attack. Special
-+ Alternative Recruit: You may recruit a Savant instead of a Common. Max 1. Special 
+    * Crumple: Gain +3 Range, Piercing, and Wounding for your next Attack. Special
++ Alternative Recruit: You may recruit a Savant on your turn. Max 1. Special 
 
 |Savant||
 |------------||
@@ -731,7 +754,7 @@ Vizier(3): +1 Common Movement, +1 Elite Movement
 
 Grand Master(4): +1 Elite Movement, +1 Elite Special
 + Elite: 
-    * Concussive Jump: Deal 4 Wounding, AOE Damage. Place your elite on a space 2-4 spaces away. Deal 4 Wounding, AOE Damage. Special + Movement
+    * Concussive Jump: Deal 4 AOE Damage. Place your elite on a space 2-4 spaces away. Deal 4 AOE Damage. Special + Movement
 + Common: 
     * Your Commons may use Movement points to capture Objectives. Passive
 ------
@@ -757,18 +780,19 @@ Grand Master(4): +1 Elite Movement, +1 Elite Special
 - Off-element abilities that use Attunement use half of the off-element Attunement rounded down.
 
 - You always have access to Tier 0 abilities, regardless of which element you are attuned to
-- At the end of the round when you gain levels, your Commons gain stats according to the new level and Element you are attuned to. If you gain two levels, gain stats for both levels in the current element
+- At the end of the round when you gain levels, your Commons gain stat bonuses according to the new level and Element you are attuned to. If you gain two levels, gain stats for both levels in the current element
+- For example, let's say you are currently level 4 and level up to 5 at the end of the round. If you attuned Fire during your turn, you gain the lvl 5 stat bonus: in this case Movement +1. If you gained 2 levels, you would get both upgrades for lvl 5 and 6 in Fire.
 
 Elite
 
 |Level|1|2|3|4|5|6|7|8|9|10|
 |------|-|-|-|-|-|-|-|-|-|-|
 |Health|4|-|5|-|-|7|-|8|-|10|	
-|Attack|1|-|-|-|2|-|-|-|-|3|
+|Attack|1|-|-|-|-|-|-|-|-|1|
 |Movement|3|-|-|-|-|-|-|-|-|3|
 |Special|3|-|-|-|4|-|-|-|5|-|
 |Reaction|1|-|2|-|3|-|4|-|5|5|
-|Damage|1|-|-|-|2|-|-|-|-|3|
+|Damage|1|-|-|-|-|-|-|-|-|1|
 |Evasion|0|-|-|-|1|-|-|2|-|3|
 |Hit|0|-|-|1|-|-|-|-|-|1|
 |Armor|0|-|-|1|-|-|2|-|-|2|		
@@ -778,14 +802,14 @@ Commons
 |Level|1|2|3|4|5|6|7|8|9|10|
 |-----|-|-|-|-|-|-|-|-|-|-|
 |Health|3|-|4|-|-|-|-|5|-|5|
-|Attack|1|-|-|-|-|-|2|-|-|2|
+|Attack|1|-|-|-|-|-|-|-|-|1|
 |Movement|3|-|-|-|-|-|-|-|4|4|
 |Special|0|-|-|-|-|-|-|-|-|0|
 |Reaction|0|-|-|-|-|-|-|-|-|0|
 |Damage|1|-|2|-|-|-|-|-|-|2|
 |Evasion|0|-|-|1|-|-|-|-|-|2|
 |Hit|0|-|-|-|-|1|-|-|-|1|
-|Armor|0|-|-|-|1|-|-|-|-|1|
+|Armor|0|-|-|-|-|-|-|-|-|0|
 
 #### Tier 0
 - Mana Infusion: Any Reactions used by Commons are taken from the Elite Reaction point pool. Cooldowns are global and apply to every unit, i.e. a Cooldown Reaction can only be applied to one unit per turn.
@@ -815,10 +839,10 @@ Attunement:
 - 2| Nimbus: Your units move through occupied spaces. Passive
 - 3| Whirlwind: At the beginning of your turn, your Commons move 2+X spaces in a random direction determined by a D6 roll, where X is Attunement. If the ending space is occupied, place your unit on the last available space. Passive
 - 4| Wind Shear: Any non-Obstacle occupied space your Commons move through is dealt 2 Wounding damage and moved 1 space randomly determined by a D6 roll. Add X Wounding damage when using Whirlwind, where X is Attunement. Evaluate random movement after your units have completed their movement. Your own units are immune to this effect. Passive
-- 5| Air Currents: Switch places of your Elite with any Common. Resolve an additional Whirlwind effect for that Common. Special.
+- 5| Zephyr: Switch places of your Elite with any Common. Resolve an additional Whirlwind effect for that Common. Special.
 - 6| Haste: Gain X Movement points this round, where X is Attunement. Passive
-- 7| Manifest Air: At the beginning of your turn, move your units to any space on the map. Passive
-- 8| Body Shroud: All incoming Wounding damage is treated as a 6 Hit attack. Passive
+- 7| Manifest Air: At the beginning of your turn, move your units to any space on the map. Evaluate first before Whirlwind. Passive
+- 8| Body Shroud: All incoming Wounding damage is treated as a 6 Hit Attack. Passive
 - 9| Prismata: After a Common takes damage, deal that same damage AOE centered on your Common. Reaction
 - 10| Lightning Strike: 10 damage with global range. Piercing. Wounding. Cooldown. Special.
 
@@ -833,16 +857,16 @@ Attunement:
 |Movement|-|+1|-|+1|-|+1|-|+1|-|
 |Hit|+1|-|+1|-|+1|-|+1|-|+1|	
 
-- 1| Ice Blast: 1+X damage ranged attack, where X is Attunement. If attack hits, target has -2 Evasion this round. Cooldown. Special.
-- 2| Hoarfrost: Units within 3+X spaces of your Elite must move 2 spaces in one direction per 1 space of Movement, where X is Attunement. Passive
+- 1| Ice Blast: +X Hit, 1+X Damage ranged Attack, where X is Attunement. Cooldown. Special.
+- 2| Hoarfrost: Units within X spaces of your Elite have -2 Evasion, where X is Attunement. Passive
 - 3| Flash Flood: When 2 of your Commons form a straight line of spaces between them, non-Obstacle units between those Commons are moved from the highest numbered Common to the lowest until movement is blocked. Ignore blocked movement damage for this effect. Passive
-- 4| Oxidize: Your units deal Piercing damage with their base Attack and Water abilities. Passive
-- 5| Hailstorm: At the beginning of your turn, choose a space within cast range. At the end of the next 2 rounds, enemy units within 3 spaces take 1+X Wounding damage, where X is Attunement. Damage does not stack from multiple effects. Passive
-- 6| Water Cutter: Add Swift and Wounding to your next Attack. Special.
-- 7| Whirlpool: Choose a space on the board. At the beginning of the next round, move all units within 3 spaces move 1 space closer to the target space. Units that are moved into the target space are moved to a unit's friendly available respawn area as chosen by the owner of the unit. Cannot use this ability on occupied spaces. Special
-- 8| Erosion: Obstacles are also moved when using Flash Flood. Passive
-- 9| Frostbite: Units within 3 spaces of your Elite add Swift to any attacks targeting them. Does not apply to your units. Passive
-- 10| Harbinger of Winter: Units within X spaces of your Elite disregard Evasion modifiers when resolving attacks, Where X is Attunement. Passive.
+- 4| Oxidize: Your Elite's Range 1 Attacks have Piercing. Passive
+- 5| Manifest Water: Your Elite may use up to X Reaction points as Attack points, where X is Attunement. Passive
+- 6| Hailstorm: Your units within 3 spaces of each other have a collective pool of Attack points to use. Passive
+- 7| Liquid Shield: Gain 3 Armor from any damage from Reactions. Reaction.
+- 8| Geyser: Enemy units take 2 Wounding Damage and need 2 Movement points to move into spaces adjacent to your Objectives, where X is Attunement. Passive.
+- 9| Frostbite: Your units add X damage to any Attacks with Swift, where X is Attunement. Passive.
+- 10| Harbinger of Winter: Enemy units within X spaces of your Elite add Swift to any attacks targeting them, where X is Attunement. Passive.
 
 - [Elements](#Elements)
 
@@ -851,20 +875,20 @@ Attunement:
 Attunement:
 
 |Level|2|3|4|5|6|7|8|9|10|
-|-----|-|-|-|-|-|-|-|-|-|-|
+|-----|-|-|-|-|-|-|-|-|-|
 |Hit|+1|-|-|-|+1|+1|+1|-|-|	
 |Damage|-|+1|-|-|-|-|-|-|+1|
 |Attack|-|-|+1|-|-|-|-|+1|-|
 |Movement|-|-|-|+1|-|-|-|-|-|
 
 - 1| Fireball: 4 damage ranged attack + 1 AOE wounding damage around target space. Cooldown. Special.
-- 2| Searing Aura: Enemy units within X spaces lose 1 Health at the end of your turn, where X is Attunement. Passive
+- 2| Searing Aura: Enemy units within X spaces of all units lose 1 Health at the end of your turn, where X is Attunement. Does not stack. Passive
 - 3| Combust: After being eliminated, your Commons deal 3 AOE Wounding damage. Passive
 - 4| Flare: When your units are attacked, initiating unit has disadvantage on its Hit roll. Passive
 - 5| Steps of Cinder: Deal 3 AOE Damage at the end of each of your next X Movements, where X is Attunement. Special
 - 6| Trace Flames: Switch places of your Elite with a Common, then deal 4 AOE damage centered around your Elite. Special
 - 7| Blackbody Radiation: Add X Piercing damage to any normal Attacks from your units, where X is Attunement. Passive
-- 8| Pyre: Select a space on the game board. Units lose 5/4/3 Health if they end the round within 0/1/2 spaces of that space. Lasts until the end of the next round. Special
+- 8| Pyre: Select a space on the game board. Units and Obstacles lose 5/4/3/ Health if they end their turn within 0/1/2 spaces of that space. Lasts 2 turn from the end of your current turn. Special.
 - 9| Meteor: Target a space on the board with global cast range. All spaces within 1 space are dealt 12 Wounding Damage at the end of your next turn. Nondirectional. Cooldown. Special.
 - 10| Gamma Burst: 5 Wounding, Piercing, Swift damage. Cooldown. Special.
 
@@ -876,7 +900,7 @@ Attunement:
 
 |Level|2|3|4|5|6|7|8|9|10|
 |-----|-|-|-|-|-|-|-|-|-|
-|Health|+1|+1|-|+1|+1|-|+1|+1|-|	
+|Health|+1|+1|-|+1|+1|-|+1|+1|-|
 |Armor|-|-|+1|-|-|+1|-|-|+1|
 
 - 1| Kinetic Impulse: Target a unit within 1 Range. Move the unit in a straight line away from your Elite 1+X spaces, where X is Attunement. If your Commons encounter an enemy unit that can move through occupied spaces, this ability counts as a ranged attack using your Elite's Hit modifier. Special
@@ -886,7 +910,7 @@ Attunement:
 - 5| Gleization: Increase your units' Armor by their missing Health until the beginning of your next turn. Special.
 - 6| Fissure: Create temporary obstacles for each space your Commons move through using Movement points. These temporary Obstacles are removed at the beginning of your next turn. Passive
 - 7| Demolish: Apply blocked movement damage to non-permanent Obstacles. Passive
-- 8| Terraform: Create an Obstacle or move an existing Obstacle up to X spaces, where X is Attunement. You may also cast Quake on Obstacles. Special
+- 8| Terraform: Create an Obstacle or move an existing Obstacle up to X spaces, where X is Attunement. You may also cast Kinetic Impulse on any Obstacles. Special
 - 9| Shockwave: Choose a space as the center of the ability. At the end of the the next 3 turns, move units at T range X spaces away, where T is the number of turns since the ability was used, and X is Attunement. Direction is chosen by owner of moved unit. Special
 - 10| Gigalith: Your Commons take up 2x2 spaces instead of 1 space. If your Commons cause blocked movement damage to another unit, increase the damage by your Common's Armor. When combined with Fissure, choose only one space per Movement to add a temporary Obstacle. Passive
 
@@ -904,16 +928,16 @@ Attunement:
 |Attack|-|-|-|-|-|-|-|+1|-|
 
 - Attunement: 
-- 1| Mana Leech: Deal 1 Piercing, Wounding Damage. Regain 2 Health. Requires Line of Sight. Special.
+- 1| Mana Leech: Deal 1 Piercing, Wounding Damage. Regain 2 Health. Requires Line of Sight. Special. Cooldown
 - 2| Phase: When attacked, gain +3 Evasion for that Attack only. You may use this ability as a reaction against Wounding damage. Treat the incoming Wounding damage as a 6 Hit attack and roll Evasion against it. Reaction 
-- 3| Aether Dagger: Your Elite's Range 1 Attacks gain 1+X Damage, where X is Attunement. Passive
+- 3| Substitute: When your Elite should lose Health, instead take the Health from a Common and switch places with that Common. Reaction
 - 4| Aether Beam: 4+X Damage Ranged Attack, where X is Attunement. Special. Cooldown.
 - 5| Channel: Commons within cast range may be used as cast points for spells. Cast point may chain and use multiple Commons within each other’s cast range. A channeled Common uses its line of sight. Passive
 - 6| Reflect: Negate Damage and instead push the initiating unit 3 spaces backwards. Cooldown. Reaction
-- 7| Substitute: After your Elite is damaged, swap places with a Common after Damage is calculated and apply that Damage irreducibly to that Common. Reaction
+- 7| Infused Elementals: Your Commons may use available Level 1 abilities using an Attack point. Passive 
 - 8| Mind Flay: X damage, where X is Attunement. Piercing. Wounding. Cooldown. Special.
 - 9| Arcane Shield: Immune to the next 1 instance of Damage. Does not stack. Cooldown. Special.
-- 10| Aether Pulse: Deal X AOE damage, where X is Attunement. Recover Health equal to the number of units damaged. Special. Cooldown
+- 10| Aether Pulse: Deal X AOE damage centered on your Elite, where X is Attunement. Recover Health equal to the number of units damaged. Special. Cooldown
 
 - [Elements](#Elements)
 
@@ -938,7 +962,7 @@ Attunement:
 - 7| Orbitals: Commons may use Movement points to move to any space within X spaces of your Elite, where X is Attunement. Passive
 - 8| Mass Teleport: Your Elite's space and all units within 1 space are moved to another space on the board centered on your Elite. Units that would land on an occupied space are not moved. Global range. Cooldown. Special.
 - 9| Simulacrum: At the beginning of the round, place a marker in your Elite's starting space. You may return to this space at the beginning of your next turn. Passive
-- 10| Duality: Your Commons are immune to targeted damage. Any Health your Elite loses is subtracted from your Commons' collective health pool, as determined by the initiating player. Commons eliminated this way gives experience to the opposing player involved. If no Commons are on the board, your Elite loses Health normally. Passive
+- 10| Duality: Your Commons within X spaces of your Elite are immune to targeted damage. Your units within X spaces of your Elite have a collective Health pool that is subtracted as determined by you. Passive
 
 - [Elements](#Elements)
 
@@ -953,8 +977,8 @@ Attunement:
 ## Engineer
 --------------
 - Commons do not automatically respawn and must be built. Built Commons may respawn within 1 space of your Elite
-- If you eliminate an enemy unit, Add a Blueprint to the your Blueprints pool. When building Commons, you may add upgrades to it by allocating the requisite amount of Blueprints. Any eliminated Common returns Blueprints to your pool. You may not stack identical Blueprints.
-- You begin the game with 2 Blueprints
+- If you eliminate an enemy unit, add a Blueprint to the your Blueprints pool. When building Commons, you may add upgrades to it by allocating the requisite amount of Blueprints. Any eliminated Common returns Blueprints to your pool. You may not stack identical Blueprints.
+- You begin the game with 3 Blueprints
 - The Engineer Elite may move through any friendly built units
 - All of your built units/obstacles count towards increasing an adjacent friendly Objective's armor
 
@@ -981,7 +1005,7 @@ Blueprints
 
 ![Dreadnought](dreadnought.PNG)
 
-+ Elite Blueprints: Unlock at Level 8
++ Elite Blueprints: Unlock at Level 8. Use a Special point to add the Blueprint to your Elite.
 - 3 | Power Armor: Elite Armor +2, Damage +3, Movement +2. Passive
 - 3 | Jetpack: Elite Movement +4, Evasion +3. Passive
 - 3 | Weapons System: Range +2, Hit +4. Passive
